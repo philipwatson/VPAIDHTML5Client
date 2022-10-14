@@ -33,7 +33,8 @@ function callbackTimeout(timer, onSuccess, onTimeout) {
     callback = function () {
         // TODO avoid leaking arguments
         // https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#32-leaking-arguments
-        if (onSuccess.apply(this, arguments)) {
+        var args = Array.prototype.slice.call(arguments);
+        if (onSuccess.apply(this, args)) {
             clearTimeout(timeout);
         }
     };

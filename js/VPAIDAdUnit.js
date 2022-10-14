@@ -215,7 +215,7 @@ function $clickThruHook(url, id, playerHandles) {
 function $trigger(event) {
     // TODO avoid leaking arguments
     // https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#32-leaking-arguments
-    this._subscribers.trigger(event, Array.prototype.slice(arguments, 1));
+    this._subscribers.trigger.apply(this._subscribers, Array.prototype.slice.call(arguments));
 }
 
 function callOrTriggerEvent(callback, subscribers, error, result) {
